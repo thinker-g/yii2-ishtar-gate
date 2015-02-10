@@ -193,7 +193,7 @@ class Module extends \yii\base\Module
      * Can be used in the blocker route action's view.
      * @var mixed
     */
-    public $customField = 'We\'ll return in a moment';
+    public $customField = 'System is down for maintenance. We\'ll return in a moment';
 
     /**
      * (non-PHPdoc)

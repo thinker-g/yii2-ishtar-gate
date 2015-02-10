@@ -1,3 +1,6 @@
+<?php
+    /* @var $this yii\web\View */
+ ?>
 <div class="ishtar-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>
@@ -7,6 +10,9 @@
     </p>
     <p>
         You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
+        <code><?= __FILE__ ?></code><br />
     </p>
+    <h3>
+        <?=  $this->context->module->customField; ?>
+    </h3>
 </div>
