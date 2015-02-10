@@ -1,8 +1,13 @@
 <?php
-    /* @var $this yii\web\View */
+    use yii\helpers\Url;
+    use yii\helpers\Html;
+/* @var $this yii\web\View */
  ?>
 <div class="ishtar-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
+    <?php if ($this->context->module->isAlphaLogin):?>
+    <p><?= Html::a('Sign out', Url::toRoute(['/' . $this->context->module->id . '/gate/signout']))?></p>
+    <?php endif;?>
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
         The action belongs to the controller "<?= get_class($this->context) ?>"

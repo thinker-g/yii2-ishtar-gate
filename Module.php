@@ -50,6 +50,12 @@ class Module extends \yii\base\Module
      * @see \yii\base\Module::$controllerNamespace
      */
     public $controllerNamespace = 'thinkerg\IshtarGate\controllers';
+    
+    /**
+     * @see \yii\base\Module::$defaultRoute.
+     * @var array
+     */
+    public $defaultRoute = 'gate';
 
     /**
      * @var string Module name.
@@ -112,12 +118,13 @@ class Module extends \yii\base\Module
      * Requests from this IP will always get pass, regardless the user login.
      * @var array
      */
-    public $privIps = [];
+    public $privIPs = [];
 
     /**
+     * Session key used to store user identity in session.
      * @var string
     */
-    public $userStateKey = 'ishtar';
+    public $sessParam = 'ishtar';
 
     /**
      * Don't block access on these routes.
@@ -157,6 +164,12 @@ class Module extends \yii\base\Module
      */
     public $errHandlerRoute = 'site/error';
 
+    /**
+     * Callable to hash the password while authencating users.
+     * @var mixed
+     */
+    public $hashCallable = [];
+    
     /**
      * An array contains the messages for informing maintenance,
      * where the key is the deadline of displaying a message,
@@ -205,6 +218,8 @@ class Module extends \yii\base\Module
         if ($this->enabled) {
             // Initialize attributes
             empty($this->blockerRoute) && $this->blockerRoute = [$this->id];
+            empty($this->hashCallable) && $this->hashCallable = [$this, 'hashPassword'];
+            
             if (empty($this->onlyRoutes)) {
                 // Positive blocking
                 $errHandler = is_array($this->errHandlerRoute) ? $this->errHandlerRoute[0] : $this->errHandlerRoute;
@@ -251,7 +266,7 @@ class Module extends \yii\base\Module
     public function getIsPrivIP()
     {
         $ip = Yii::$app->getRequest()->getUserIP();
-        foreach ($this->privIps as $filter) {
+        foreach ($this->privIPs as $filter) {
             if ($filter === '*' || $filter === $ip || (($pos = strpos($filter, '*')) !== false && !strncmp($ip, $filter, $pos))) {
                 return true;
             }
@@ -261,7 +276,7 @@ class Module extends \yii\base\Module
 
     public function getIsAlphaLogin()
     {
-        return false;
+        return Yii::$app->getSession()->has($this->sessParam);
     }
 
     public function getIsTesterAccess()
@@ -306,6 +321,11 @@ class Module extends \yii\base\Module
         } else {
             Yii::$app->catchAll = $this->blockerRoute;
         }
+    }
+    
+    public static function hashPassword($password)
+    {
+        return md5($password);
     }
 
 }
