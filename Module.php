@@ -50,7 +50,7 @@ class Module extends \yii\base\Module
      * @see \yii\base\Module::$controllerNamespace
      */
     public $controllerNamespace = 'thinkerg\IshtarGate\controllers';
-    
+
     /**
      * @see \yii\base\Module::$defaultRoute.
      * @var array
@@ -100,12 +100,13 @@ class Module extends \yii\base\Module
 
     /**
      * Route to logout public users. <br />
-     * This will take effect when $logoutPublics is set to true. <br />
-     * Overwrite this attribute if the site is not using the default logout path of yii framework.
+     * This takes effect when $logoutPublic is set to true. <br />
+     * Leave it as "null" or an empty array, system will use Yii::$app->getUser()->logout() to logout current user.
+     * Otherwise user will be redirected to the specified route, and the destination route must allow GET request.
      * @var array
      * @see \thinkerg\IshtarGate\Module::$logoutPublic
      */
-    public $siteLogoutRoute = ['site/logout'];
+    public $siteLogoutRoute;
 
     /**
      * Alpha test user credentials. Let these users pass.
@@ -128,16 +129,18 @@ class Module extends \yii\base\Module
 
     /**
      * Don't block access on these routes.
-     * Elements in the array should be STRING indicates the route of the module/controller/action.
+     * Elements in the array should be STRINGs, without the leading slash "/",
+     * indicate the routes of the module/controller/action.
      * No parameter is supported.
      * @var array
      */
     public $exceptRoutes = [];
 
     /**
-     * If this array has elements, only listed actions will be blocked, $logoutPublic won't take effects.
+     * If this array has elements, only listed actions will be blocked, and $logoutPublic won't take effects.
      * Leave it empty and use $exceptRoutes if a whole site maintenance is taking place.
-     * Elements in the array should be STRING indicates the route of the module/controller/action.
+     * Elements in the array should be STRINGs, without the leading slash "/",
+     * indicate the routes of the module/controller/action.
      * No parameter is supported.
      * @var array
      */
@@ -169,7 +172,7 @@ class Module extends \yii\base\Module
      * @var mixed
      */
     public $hashCallable = [];
-    
+
     /**
      * An array contains the messages for informing maintenance,
      * where the key is the deadline of displaying a message,
@@ -219,16 +222,20 @@ class Module extends \yii\base\Module
             // Initialize attributes
             empty($this->blockerRoute) && $this->blockerRoute = [$this->id];
             empty($this->hashCallable) && $this->hashCallable = [$this, 'hashPassword'];
-            
+
             if (empty($this->onlyRoutes)) {
                 // Positive blocking
                 $errHandler = is_array($this->errHandlerRoute) ? $this->errHandlerRoute[0] : $this->errHandlerRoute;
                 $blocker = is_array($this->blockerRoute) ? $this->blockerRoute[0] : $this->blockerRoute;
-                $siteLogout = is_array($this->siteLogoutRoute) ? $this->siteLogoutRoute[0] : $this->siteLogoutRoute;
                 array_push($this->exceptRoutes, $errHandler);
                 array_push($this->exceptRoutes, $blocker);
-                array_push($this->exceptRoutes, $siteLogout);
 
+                if (!empty($this->siteLogoutRoute)) {
+                    $siteLogout = is_array($this->siteLogoutRoute) ? $this->siteLogoutRoute[0] : $this->siteLogoutRoute;
+                    array_push($this->exceptRoutes, $siteLogout);
+                }
+
+                // Except current route if user is accessing this module
                 $route = Yii::$app->getRequest()->resolve()[0];
                 if (preg_match("#/?{$this->id}/?#", $route)) {
                     array_push($this->exceptRoutes, $route);
@@ -291,7 +298,12 @@ class Module extends \yii\base\Module
 
         if (! in_array(Yii::$app->getRequest()->resolve()[0], $this->exceptRoutes)) {
             if ($this->logoutPublic && !Yii::$app->getUser()->isGuest) {
-                Yii::$app->getResponse()->redirect($this->siteLogoutRoute);
+                if (empty($this->siteLogoutRoute)) {
+                    Yii::$app->getUser()->logout();
+                    Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl());
+                } else {
+                    Yii::$app->getResponse()->redirect($this->siteLogoutRoute);
+                }
                 Yii::$app->end();
             }
             if ($this->useRedirection) {
@@ -322,7 +334,7 @@ class Module extends \yii\base\Module
             Yii::$app->catchAll = $this->blockerRoute;
         }
     }
-    
+
     public static function hashPassword($password)
     {
         return md5($password);
