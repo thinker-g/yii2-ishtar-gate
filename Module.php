@@ -30,14 +30,6 @@ class Module extends \yii\base\Module
 {
 
     /**
-     * Event triggered after initialization, provides a point to re-setup attributes after the configuration array.
-     * For example, while tester users need to be load other place than the config array. Handler bound on this event
-     * can replace the attribute $credentials with another array of customized data.
-     * @var unknown
-     */
-    const EVENT_POST_INIT = 'ishtarPostInit';
-
-    /**
      * Event triggered before proform the actual block action.
      * The blocking can be by by either a redirection or the route set in \yii\web\Application::$catchAll.
      * @var string
@@ -246,8 +238,6 @@ class Module extends \yii\base\Module
                 Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'passiveBlocking']);
             }
 
-            $this->trigger(self::EVENT_POST_INIT, new Event());
-
         } else {
             // news bar initialization
         }
@@ -327,7 +317,7 @@ class Module extends \yii\base\Module
 
     protected function blockAccess()
     {
-        $this->trigger(self::EVENT_BEFORE_BLOCK, new Event());
+        $this->trigger(self::EVENT_BEFORE_BLOCK);
         if ($this->useRedirection) {
             Yii::$app->getResponse()->redirect($this->blockerRoute);
         } else {
