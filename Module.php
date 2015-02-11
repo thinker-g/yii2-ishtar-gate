@@ -260,6 +260,10 @@ class Module extends \yii\base\Module
         return $this->version;
     }
 
+    /**
+     * Get whether the accessing IP is from a premitted address range, where all accesses will be allowed. 
+     * @return boolean
+     */
     public function getIsPrivIP()
     {
         $ip = Yii::$app->getRequest()->getUserIP();
@@ -271,16 +275,30 @@ class Module extends \yii\base\Module
         return false;
     }
 
+    /**
+     * Get whether current user is logged in via ishtar sign-in portal.
+     * @return boolean
+     */
     public function getIsAlphaLogin()
     {
         return Yii::$app->getSession()->has($this->sessParam);
     }
 
+    /**
+     * Get whether user is accessing from a privileged IP address, or logged in as an internal tester.
+     * It's a quick way to check if current access should be blocked or not.
+     * @return boolean
+     */
     public function getIsTesterAccess()
     {
         return $this->isPrivIP || $this->isAlphaLogin;
     }
 
+    /**
+     * Positive blocker, which blocks all accesses except certain routes.
+     * This function is an event handler bound to the event \yii\base\Application::EVENT_BEFORE_REQUEST.
+     * @param Event $event \yii\base\Application::EVENT_BEFORE_REQUEST
+     */
     public function positiveBlocking(Event $event)
     {
         if ($this->isTesterAccess)
@@ -306,6 +324,10 @@ class Module extends \yii\base\Module
 
     }
 
+    /**
+     * Passive blocker, which blocks accesses to certain routes.
+     * @param Event $event \yii\base\Application::EVENT_BEFORE_REQUEST
+     */
     public function passiveBlocking(Event $event)
     {
         if ($this->isTesterAccess)
@@ -315,6 +337,12 @@ class Module extends \yii\base\Module
         }
     }
 
+    /**
+     * The actual blocking operation.
+     * This function is invoked by Module::passiveBlocking() or Module::positiveBlocking(), to perform the block
+     * by redirection or by changing the request route (depends on setting of attribute $useRedirection).
+     * Event EVENT_BEFORE_BLOCK will be triggered.
+     */
     protected function blockAccess()
     {
         $this->trigger(self::EVENT_BEFORE_BLOCK);
