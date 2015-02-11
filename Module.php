@@ -177,7 +177,7 @@ class Module extends \yii\base\Module
      *      When there's messages to display, a news ticker will be displayed
      *      on the top of the page. <br />
      *
-     *      When the module's isMaintaining is true. This will not run.
+     *      When the module is enabled. This will not run.
      *
      * @example
      *      [
@@ -261,7 +261,7 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * Get whether the accessing IP is from a premitted address range, where all accesses will be allowed. 
+     * Get whether the accessing IP is from a premitted address range, where all accesses will be allowed.
      * @return boolean
      */
     public function getIsPrivIP()
