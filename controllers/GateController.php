@@ -40,7 +40,7 @@ class GateController extends \yii\web\Controller
     
     public function actionSignout()
     {
-        Yii::$app->getSession()->remove($this->module->sessParam);
+        Yii::$app->getSession()->remove($this->module->sessKey);
         $this->goHome();
     }
 }
