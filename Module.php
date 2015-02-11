@@ -47,7 +47,7 @@ class Module extends \yii\base\Module
      * @see \yii\base\Module::$defaultRoute.
      * @var array
      */
-    public $defaultRoute = 'gate';
+    public $defaultRoute = 'gate/index';
 
     /**
      * @var string Module name.
@@ -117,7 +117,7 @@ class Module extends \yii\base\Module
      * Session key used to store user identity in session.
      * @var string
     */
-    public $sessKey = 'ishtar';
+    public $sessParam = 'ishtar';
 
     /**
      * Don't block access on these routes.
@@ -212,7 +212,7 @@ class Module extends \yii\base\Module
         parent::init();
         if ($this->enabled) {
             // Initialize attributes
-            empty($this->blockerRoute) && $this->blockerRoute = [$this->id];
+            empty($this->blockerRoute) && $this->blockerRoute = [$this->id . '/' . $this->defaultRoute];
             empty($this->hashCallable) && $this->hashCallable = [$this, 'hashPassword'];
 
             if (empty($this->onlyRoutes)) {
@@ -281,7 +281,7 @@ class Module extends \yii\base\Module
      */
     public function getIsAlphaLogin()
     {
-        return Yii::$app->getSession()->has($this->sessKey);
+        return Yii::$app->getSession()->has($this->sessParam);
     }
 
     /**

@@ -15,7 +15,7 @@ if (is_array($module->blockerRoute)) {
     $blockerRoute[0] = '/' . $blockerRoute[0];
 } else {
     $blockerRoute = '/' . $blockerRoute;
-}
+}   
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
