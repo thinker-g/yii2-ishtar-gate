@@ -1,4 +1,4 @@
-Ishtar Gate
+Ishtar Gate [Under development]
 ===========
 Ishtar Gate is an yii2.0 extension provides enhanced maintenance mode with restricted access for internal tests.
 
