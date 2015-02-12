@@ -117,7 +117,7 @@ class Module extends \yii\base\Module
      * Session key used to store user identity in session.
      * @var string
     */
-    public $sessParam = 'ishtar';
+    public $sessKey = 'ishtar';
 
     /**
      * Don't block access on these routes.
@@ -281,7 +281,7 @@ class Module extends \yii\base\Module
      */
     public function getIsAlphaLogin()
     {
-        return Yii::$app->getSession()->has($this->sessParam);
+        return Yii::$app->getSession()->has($this->sessKey);
     }
 
     /**

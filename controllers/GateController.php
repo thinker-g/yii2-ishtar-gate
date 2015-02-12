@@ -27,7 +27,7 @@ class GateController extends \yii\web\Controller
         if ($model->load(Yii::$app->getRequest()->post()) && $model->validate()) {
             if (array_key_exists($model->username, $this->module->credentials)
                 && ($model->password == $this->module->credentials[$model->username])) {
-                Yii::$app->getSession()->set($this->module->sessParam, $model->username);
+                Yii::$app->getSession()->set($this->module->sessKey, $model->username);
                 $this->goHome();
             } else {
                 $model->addError('password', 'Invalid username or password.');
