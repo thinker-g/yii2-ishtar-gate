@@ -240,6 +240,7 @@ class Module extends \yii\base\Module
 
         } else {
             // news bar initialization
+            Yii::createObject('thinkerg\IshtarGate\INewsTickerAsset');
         }
 
     }
