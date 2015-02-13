@@ -4,6 +4,7 @@ namespace thinkerg\IshtarGate\controllers;
 
 use Yii;
 use thinkerg\IshtarGate\models\LoginForm;
+use yii\web\HttpException;
 
 /**
  * 
@@ -21,6 +22,9 @@ class GateController extends \yii\web\Controller
     
     public function actionSignin()
     {
+        if (! $this->module->enabled) {
+            throw new HttpException(403, 'The module must be ENABLED to access this action.');
+        }
         $model = new LoginForm();
         $model->hashCallable = $this->module->hashCallable;
             
