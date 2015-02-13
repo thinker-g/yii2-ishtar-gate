@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+ul.inewsticker {
+	padding: auto;
+	list-style: none;
+	z-index: 9999;
+}

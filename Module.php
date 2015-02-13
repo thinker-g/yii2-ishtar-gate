@@ -188,13 +188,9 @@ class Module extends \yii\base\Module
     public $news = [];
 
     /**
-     * Define the object, which will generate the news bar on the page. <br />
-     * The "class" must be a subclass of UIComponent, and must be placed under directory "components". <br />
-     * The run() method will be called to generate news bar. <br />
-     * Set to <em>false</em> to disable it. <br />
-     * @var array | bool
+     * @var string
     */
-    public $newsBar = ['class' => 'NewsBar'];
+    public $newsTicker = 'thinkerg\IshtarGate\INewsTickerAsset';
 
     /**
      * Custom attribute to store custom messages or some other things.
@@ -240,7 +236,7 @@ class Module extends \yii\base\Module
 
         } else {
             // news bar initialization
-            Yii::createObject('thinkerg\IshtarGate\INewsTickerAsset');
+            empty($this->news) || $this->loadNewsTicker();
         }
 
     }
@@ -352,6 +348,29 @@ class Module extends \yii\base\Module
         } else {
             Yii::$app->catchAll = $this->blockerRoute;
         }
+    }
+    
+    /**
+     * Load news keeper to current View object.
+     * The loaded "newsticker" object must be inherited from yii\web\AssetBundle.
+     * And the "newsticker"'s register() method will be invoked right after the object is initialized.
+     * The news array of this Module object will be firstly cleaned up,
+     * and then be saved in view's "params" attribute, with key "news".
+     */
+    protected function loadNewsTicker()
+    {
+        $now = time();
+        // Remove expired news
+        foreach ($this->news as $ts => $news) {
+            if(strtotime($ts) < $now) {
+                unset($this->news[$ts]);
+            }
+        }
+        if (!empty($this->news)) {
+            Yii::$app->getView()->params['news'] = $this->news;
+            call_user_func($this->newsTicker . "::register", Yii::$app->getView());
+        } // else { // all news have expired}
+        
     }
 
     public static function hashPassword($password)
