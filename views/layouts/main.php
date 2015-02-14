@@ -6,15 +6,18 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/* @var \yii\web\View $this */
+/* @var string $content */
+/* @var \thinkerg\IshtarGate\Module $module */ 
 
 $module = $this->context->module;
 $blockerRoute = $module->blockerRoute;
-if (is_array($module->blockerRoute)) {
+if ($blockerRoute === []) {
+    $blockerRoute[0] = '/' . $module->id . '/gate/index';
+} elseif (is_array($module->blockerRoute)) {
     $blockerRoute[0] = '/' . $blockerRoute[0];
 } else {
-    $blockerRoute = '/' . $blockerRoute;
+    $blockerRoute = ['/' . $blockerRoute];
 }   
 AppAsset::register($this);
 ?>
