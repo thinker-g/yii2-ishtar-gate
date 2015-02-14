@@ -349,7 +349,7 @@ class Module extends \yii\base\Module
             Yii::$app->catchAll = $this->blockerRoute;
         }
     }
-    
+
     /**
      * Load news keeper to current View object.
      * The loaded "newsticker" object must be inherited from yii\web\AssetBundle.
@@ -370,15 +370,18 @@ class Module extends \yii\base\Module
             Yii::$app->getView()->params['news'] = $this->news;
             if (is_array($this->newsTicker)) {
                 $class = $this->newsTicker['class'];
-                unset($this->newsTicker['class']);
-                Yii::$app->getAssetManager()->bundles[$class] = $this->newsTicker;
+                // if the bundle options has been explicitly set in bundles of assetManager, dont copy. 
+                if (!isset(Yii::$app->getAssetManager()->bundles[$class])) {
+                    unset($this->newsTicker['class']);
+                    Yii::$app->getAssetManager()->bundles[$class] = $this->newsTicker;
+                }
                 call_user_func($class . "::register", Yii::$app->getView());
             } else {
                 call_user_func($this->newsTicker . "::register", Yii::$app->getView());
             }
-            
+
         } // else { // all news have expired}
-        
+
     }
 
     public static function hashPassword($password)

@@ -8,27 +8,27 @@ use yii\web\View;
 class INewsTickerAsset extends AssetBundle
 {
     public $sourcePath = '@thinkerg/IshtarGate/assets';
-    
+
     public $js = [
         'inewsticker.js'
     ];
-    
+
     public $css = [
         'inewsticker.css'
     ];
-    
+
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset'
     ];
-    
+
     public $containerCssClass = 'inewsticker-container container';
-    
+
     public $tickerId = 'ishtar-inewsticker';
-    
+
     public $tickerCssClass = 'inewsticker text-center';
-    
+
     public $pluginOptions = [
         'effect' => 'typing',
         'speed' => 100,
@@ -37,7 +37,7 @@ class INewsTickerAsset extends AssetBundle
         'font_family' => 'arial',
         'delay_after' => 5000
     ];
-    
+
     /* (non-PHPdoc)
      * @see \yii\web\AssetBundle::init()
      */
@@ -64,7 +64,7 @@ class INewsTickerAsset extends AssetBundle
                 id: '{$this->tickerId}',
                 class: '{$this->tickerCssClass}'
             }).html('$html');
-           
+
             $('<button>',{
                 'class': 'close',
                 'data-dismiss': 'alert'
@@ -74,7 +74,7 @@ class INewsTickerAsset extends AssetBundle
             });
             tickerContainer.append(tickerNode);
             $('body').prepend(tickerContainer);
-           
+
             $('#{$this->tickerId}').inewsticker({$options});
             tickerContainer.show();
         ";
@@ -88,7 +88,7 @@ class INewsTickerAsset extends AssetBundle
         }
         return $html;
     }
-    
+
 }
 
 ?>

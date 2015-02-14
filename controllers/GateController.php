@@ -19,7 +19,7 @@ class GateController extends \yii\web\Controller
     {
         return $this->render('index');
     }
-    
+
     public function actionSignin()
     {
         if (! $this->module->enabled) {
@@ -27,7 +27,7 @@ class GateController extends \yii\web\Controller
         }
         $model = new LoginForm();
         $model->hashCallable = $this->module->hashCallable;
-            
+
         if ($model->load(Yii::$app->getRequest()->post()) && $model->validate()) {
             if (array_key_exists($model->username, $this->module->credentials)
                 && ($model->password == $this->module->credentials[$model->username])) {
@@ -37,11 +37,11 @@ class GateController extends \yii\web\Controller
                 $model->addError('password', 'Invalid username or password.');
             }
         }
-        
+
         return $this->render('signin', ['model' => $model]);
-        
+
     }
-    
+
     public function actionSignout()
     {
         Yii::$app->getSession()->remove($this->module->sessKey);

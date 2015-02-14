@@ -24,7 +24,7 @@ class LoginForm extends Model
             [['username', 'password'], 'required'],
         ];
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see \yii\base\Model::afterValidate()
