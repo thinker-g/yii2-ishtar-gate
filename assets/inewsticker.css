@@ -1,6 +1,25 @@
 @CHARSET "UTF-8";
-ul.inewsticker {
-	padding: auto;
-	list-style: none;
+.inewsticker-container.alert {
+	position: relative;
 	z-index: 9999;
+	background: rgba(0,0,0,0.3);
+	min-height: 2rem;
+	border-radius: 0 0 0.5rem 0.5rem;
+	-webkit-box-shadow: 0 0 7px grey;
+	-moz-box-shadow: 0 0 7px grey;
+	box-shadow: 0 0 7px grey;
+	padding: 0 15px;
+	border: none;
+}
+
+.inewsticker-container.alert .close {
+	opacity: .5;
+	color: #fff;
+	font-weight: normal;
+}
+
+ul.inewsticker {
+	padding: 0.2rem 0;
+	list-style: none;
+	margin: 0;
 }

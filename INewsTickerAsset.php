@@ -18,7 +18,9 @@ class INewsTickerAsset extends AssetBundle
     ];
     
     public $depends = [
-        'yii\web\JqueryAsset'
+        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset'
     ];
     
     public $containerCssClass = 'inewsticker-container container';
@@ -32,7 +34,6 @@ class INewsTickerAsset extends AssetBundle
         'speed' => 100,
         'dir' => 'ltr',
         'font_size' => 13,
-        'color' => '#fff',
         'font_family' => 'arial',
         'delay_after' => 5000
     ];
@@ -57,18 +58,24 @@ class INewsTickerAsset extends AssetBundle
         $html = $this->getHtml();
         return "
             var tickerContainer = $('<div>', {
-                class: '{$this->containerCssClass}'
+                class: '{$this->containerCssClass} alert fade in'
             }).hide();
             var tickerNode = $('<ul>', {
                 id: '{$this->tickerId}',
                 class: '{$this->tickerCssClass}'
             }).html('$html');
-            
+           
+            $('<button>',{
+                'class': 'close',
+                'data-dismiss': 'alert'
+            }).html('<span>&times;</span>').appendTo(tickerContainer);
+            tickerContainer.on('close.bs.alert', function(){
+                //
+            });
             tickerContainer.append(tickerNode);
             $('body').prepend(tickerContainer);
-            
-            $('#w0').hide();
-            $('.inewsticker').inewsticker({$options});
+           
+            $('#{$this->tickerId}').inewsticker({$options});
             tickerContainer.show();
         ";
     }

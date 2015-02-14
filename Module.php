@@ -368,7 +368,15 @@ class Module extends \yii\base\Module
         }
         if (!empty($this->news)) {
             Yii::$app->getView()->params['news'] = $this->news;
-            call_user_func($this->newsTicker . "::register", Yii::$app->getView());
+            if (is_array($this->newsTicker)) {
+                $class = $this->newsTicker['class'];
+                unset($this->newsTicker['class']);
+                Yii::$app->getAssetManager()->bundles[$class] = $this->newsTicker;
+                call_user_func($class . "::register", Yii::$app->getView());
+            } else {
+                call_user_func($this->newsTicker . "::register", Yii::$app->getView());
+            }
+            
         } // else { // all news have expired}
         
     }
