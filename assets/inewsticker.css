@@ -10,6 +10,7 @@
 	box-shadow: 0 0 7px grey;
 	padding: 0 15px;
 	border: none;
+	margin: 0px auto;
 }
 
 .inewsticker-container.alert .close {

@@ -57,10 +57,20 @@ class INewsTickerAsset extends AssetBundle
         $options = json_encode($this->pluginOptions);
         $html = $this->getHtml();
         return "
-            var tickerContainer = $('<div>', {
+            ishtarNewsticker = {};
+
+            ishtarNewsticker.holder = $('<div>').css({
+                position: 'absolute',
+                width: '100%',
+                top: '0px',
+                left: '0px'
+            });
+
+            ishtarNewsticker.container = $('<div>', {
                 class: '{$this->containerCssClass} alert fade in'
             }).hide();
-            var tickerNode = $('<ul>', {
+
+            ishtarNewsticker.tickerNode = $('<ul>', {
                 id: '{$this->tickerId}',
                 class: '{$this->tickerCssClass}'
             }).html('$html');
@@ -68,15 +78,19 @@ class INewsTickerAsset extends AssetBundle
             $('<button>',{
                 'class': 'close',
                 'data-dismiss': 'alert'
-            }).html('<span>&times;</span>').appendTo(tickerContainer);
-            tickerContainer.on('close.bs.alert', function(){
-                //
-            });
-            tickerContainer.append(tickerNode);
-            $('body').prepend(tickerContainer);
+            }).html('<span>&times;</span>').appendTo(ishtarNewsticker.container);
 
-            $('#{$this->tickerId}').inewsticker({$options});
-            tickerContainer.show();
+            ishtarNewsticker.container.on('close.bs.alert', function(){
+                console.info('close ishtar news ticker');//
+            });
+
+            ishtarNewsticker.container.append(ishtarNewsticker.tickerNode);
+            ishtarNewsticker.holder.append(ishtarNewsticker.container);
+            $('body').prepend(ishtarNewsticker.holder);
+
+            ishtarNewsticker.tickerNode.inewsticker({$options});
+            setTimeout('ishtarNewsticker.container.fadeIn();',500);
+
         ";
     }
 
