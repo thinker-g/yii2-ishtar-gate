@@ -4,20 +4,18 @@
 /* @var $this yii\web\View */
  ?>
 <div class="ishtar-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+    <h1><?= $this->context->module->name ?> <?= $this->context->module->version ?></h1>
     <?php if ($this->context->module->isAlphaLogin):?>
-    <p><?= Html::a('Sign out', Url::toRoute(['/' . $this->context->module->id . '/gate/signout']))?></p>
+    <p><?= Html::a('Sign out ', Url::toRoute(['/' . $this->context->module->id . '/gate/signout']))?></p>
     <?php endif;?>
     <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
+        <?= $this->context->module->name?> is an yii2.0 extension provides enhanced maintenance mode with restricted access for internal tests.
     </p>
     <p>
         You may customize this page by editing the following file:<br>
         <code><?= __FILE__ ?></code><br />
     </p>
-    <h3>
-        <?=  $this->context->module->customField; ?>
-    </h3>
+    <p>
+        <strong>Custom message:</strong> <?=  $this->context->module->customField; ?>
+    </p>
 </div>
