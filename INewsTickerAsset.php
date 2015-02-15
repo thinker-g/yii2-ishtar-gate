@@ -30,9 +30,10 @@ class INewsTickerAsset extends AssetBundle
     public $tickerCssClass = 'inewsticker text-center';
 
     public $pluginOptions = [
-        'effect' => 'typing',
-        'speed' => 100,
+        'effect' => 'slide',
+        'speed' => 3000,
         'dir' => 'ltr',
+        'color' => '#fff',
         'font_size' => 13,
         'font_family' => 'arial',
         'delay_after' => 5000
