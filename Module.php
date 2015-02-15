@@ -9,8 +9,9 @@
 namespace thinkerg\IshtarGate;
 
 use Yii;
-use yii\base\Application;
+use yii\web\Application;
 use yii\base\Event;
+use yii\web\View;
 
 /**
  * Ishtar Gate is a new version of Alpha Portal Module developed based on Yii 2.0.
@@ -220,6 +221,7 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
         if ($this->enabled) {
             // Initialize attributes
             empty($this->blockerRoute) && ($this->blockerRoute = [$this->id . '/' . $this->defaultRoute]);
@@ -244,6 +246,8 @@ class Module extends \yii\base\Module
             } else {
                 Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'passiveBlocking']);
             }
+
+            $this->tipVersion && $this->isTesterAccess && $this->tipVersion();
 
         } else {
             // news bar initialization
@@ -388,6 +392,31 @@ class Module extends \yii\base\Module
 
         } // else { // all news have expired}
 
+    }
+
+    /**
+     * Prompt version number on web page.
+     */
+    protected function tipVersion()
+    {
+        $view = Yii::$app->getView();
+        $verInfo = $this->name . ' ' . $this->version;
+        $view->registerCss('
+            .ishtar-version-tip {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 0.5rem;
+                text-align: right;
+            }
+        ');
+        $view->registerJs("
+            ishtarVerNode = document.createElement('div');
+            ishtarVerNode.innerHTML = '{$verInfo}';
+            ishtarVerNode.className = 'ishtar-version-tip';
+            document.body.appendChild(ishtarVerNode);
+            ", View::POS_READY);
     }
 
     /**
