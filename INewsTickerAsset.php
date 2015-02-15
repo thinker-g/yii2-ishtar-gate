@@ -19,28 +19,58 @@ use yii\web\View;
  */
 class INewsTickerAsset extends AssetBundle
 {
+    /**
+     * @var string overriding parament property.
+     * @see \yii\web\AssetBundle::$sourcePath
+     */
     public $sourcePath = '@thinkerg/IshtarGate/assets';
 
+    /**
+     * @var array overriding parent property.
+     * @see \yii\web\AssetBundle::$js
+     */
     public $js = [
         'inewsticker.js'
     ];
 
+    /**
+     * @var array overriding parent property.
+     * @see \yii\web\AssetBundle::$css
+     */
     public $css = [
         'inewsticker.css'
     ];
 
+    /**
+     * @var array overriding parent property.
+     * @see \yii\web\AssetBundle::$css
+     */
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset'
     ];
 
+    /**
+     * @var string css classes added to newsbar container.
+     */
     public $containerCssClass = 'inewsticker-container container';
 
+    /**
+     * @var string newsbar id of the HTML element.
+     */
     public $tickerId = 'ishtar-inewsticker';
 
+    /**
+     * @var string  css classes added to news ticker element.
+     */
     public $tickerCssClass = 'inewsticker text-center';
 
+    /**
+     * @var array options passed to the jquery plugin "inewsticker"
+     * Any option supported by inewsticker can be set in this array.
+     * @see https://github.com/progpars/inewsticker
+     */
     public $pluginOptions = [
         'effect' => 'slide',
         'speed' => 3000,
@@ -61,7 +91,7 @@ class INewsTickerAsset extends AssetBundle
     }
 
     /**
-     * 
+     * Js codes will be registered to view component.
      * @param \yii\web\View $view
      * @see \yii\web\AssetBundle::register()
      */
@@ -107,6 +137,9 @@ class INewsTickerAsset extends AssetBundle
         ";
     }
 
+    /**
+     * @return string html codes needed by the plugin.
+     */
     protected function getHtml()
     {
         $html = '';
