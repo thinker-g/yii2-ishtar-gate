@@ -105,7 +105,7 @@ class Module extends \yii\base\Module
      * Otherwise user will be redirected to the specified route, and the destination route must allow GET request.
      * @see \thinkerg\IshtarGate\Module::$logoutPublic
      */
-    public $siteLogoutRoute;
+    public $siteLogoutRoute = ['site/logout'];
 
     /**
      * @var array Alpha test user credentials. Let these users pass. 
@@ -158,9 +158,10 @@ class Module extends \yii\base\Module
     public $useRedirection = false;
 
     /**
-     * @var string|array Error handler of Yii::$app. Will be added to except routes while initializing the module.
+     * @var string Error handler of Yii::$app. Will be added to except routes while initializing the module.
+     * This parameter only need to be setup while the default error handler of the application is changed.
      */
-    public $errHandlerRoute = 'site/error';
+    public $errActionRoute = 'site/error';
 
     /**
      * @var mixed Callback to hash the password while authencating users.
@@ -221,26 +222,23 @@ class Module extends \yii\base\Module
         parent::init();
         if ($this->enabled) {
             // Initialize attributes
-            empty($this->blockerRoute) && $this->blockerRoute = [$this->id . '/' . $this->defaultRoute];
-            empty($this->hashCallable) && $this->hashCallable = [$this, 'hashPassword'];
+            empty($this->blockerRoute) && ($this->blockerRoute = [$this->id . '/' . $this->defaultRoute]);
+            empty($this->hashCallable) && ($this->hashCallable = [$this, 'hashPassword']);
 
             if (empty($this->onlyRoutes)) {
                 // Positive blocking
-                $errHandler = is_array($this->errHandlerRoute) ? $this->errHandlerRoute[0] : $this->errHandlerRoute;
-                $blocker = is_array($this->blockerRoute) ? $this->blockerRoute[0] : $this->blockerRoute;
-                array_push($this->exceptRoutes, $errHandler);
-                array_push($this->exceptRoutes, $blocker);
-
-                if (!empty($this->siteLogoutRoute)) {
-                    $siteLogout = is_array($this->siteLogoutRoute) ? $this->siteLogoutRoute[0] : $this->siteLogoutRoute;
-                    array_push($this->exceptRoutes, $siteLogout);
-                }
-
                 // Except current route if user is accessing this module
-                $route = Yii::$app->getRequest()->resolve()[0];
-                if (preg_match("#/?{$this->id}/?#", $route)) {
-                    array_push($this->exceptRoutes, $route);
+                $route = Yii::$app->getRequest()->resolve();
+                if (preg_match("#/?{$this->id}/?#", $route[0])) {
+                    array_push($this->exceptRoutes, $route[0]);
                 }
+
+                is_string($this->blockerRoute) && ($this->blockerRoute = [$this->blockerRoute]);
+                is_string($this->siteLogoutRoute) && ($this->siteLogoutRoute = [$this->siteLogoutRoute]);
+
+                array_push($this->exceptRoutes, $this->errActionRoute);
+                array_push($this->exceptRoutes, $this->blockerRoute[0]);
+                array_push($this->siteLogoutRoute, $this->siteLogoutRoute[0]);
 
                 Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'positiveBlocking']);
             } else {
@@ -324,12 +322,7 @@ class Module extends \yii\base\Module
                 }
                 Yii::$app->end();
             }
-            if ($this->useRedirection) {
-                Yii::$app->getResponse()->redirect($this->blockerRoute);
-            } else {
-                Yii::$app->catchAll = $this->blockerRoute;
-            }
-
+            $this->blockAccess();
         }
 
     }
