@@ -1,10 +1,22 @@
 <?php
+/**
+ * @link https://github.com/thinker-g/yii2-ishtar-gate
+ * @copyright Copyright (c) Thinker_g (Jiyan.guo@gmail.com)
+ * @author Thinker_g
+ * @license MIT
+ */
+
 namespace thinkerg\IshtarGate;
 
 use Yii;
 use yii\web\AssetBundle;
 use yii\web\View;
-
+/**
+ * Asset bundle of jquery plugin "Inews ticker".
+ * @author Thinker_g
+ * @see https://github.com/progpars/inewsticker
+ *
+ */
 class INewsTickerAsset extends AssetBundle
 {
     public $sourcePath = '@thinkerg/IshtarGate/assets';

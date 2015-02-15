@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/thinker-g/yii2-ishtar-gate
+ * @copyright Copyright (c) Thinker_g (Jiyan.guo@gmail.com)
+ * @author Thinker_g
+ * @license MIT
+ */
 
 namespace thinkerg\IshtarGate\controllers;
 

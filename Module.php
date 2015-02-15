@@ -1,8 +1,12 @@
 <?php
 /**
+ * @link https://github.com/thinker-g/yii2-ishtar-gate
+ * @copyright Copyright (c) Thinker_g (Jiyan.guo@gmail.com)
  * @author Thinker_g
- * @version 1.0
+ * @license MIT
+ * @since v1.0.0
  */
+
 namespace thinkerg\IshtarGate;
 
 use Yii;
@@ -57,7 +61,7 @@ class Module extends \yii\base\Module
     /**
      * @var string Module version.
      */
-    private $version = 'v1.0';
+    private $version = 'v1.0.0';
 
     /**
      * If the site is in maintenance mode. Default to false.
