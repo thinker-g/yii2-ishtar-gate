@@ -25,7 +25,7 @@ For planned maintenance, a news ticker is integrated in the module, so that we c
 *PS: Instructions of setting up these enhanced features will be mentioned in later sections.*
 
 ### Does is hurt?
-The system performance has been well considered while designing this module. Even the module is not frequently used and needs to be mounted to the "bootstrap" phase, it does nothing when it's disabled. To load an empty module takes barely no resource for yii framework.
+The system performance has been well considered while designing this module. Even the module is not frequently used and needs to be mounted to the "bootstrap" phase, it does nothing when it's set to disabled. To load an empty module takes barely no resource for yii framework.
 
 
 
