@@ -6,7 +6,7 @@
 <div class="ishtar-default-index">
     <h1><?= $this->context->module->name ?> <?= $this->context->module->version ?></h1>
     <?php if ($this->context->module->isAlphaLogin):?>
-    <p><?= Html::a('Sign out ', Url::toRoute(['/' . $this->context->module->id . '/gate/signout']))?></p>
+    <p><?= Html::a('Sign out ' . $this->context->module->name, Url::toRoute(['/' . $this->context->module->id . '/gate/signout']))?></p>
     <?php endif;?>
     <p>
         <?= $this->context->module->name?> is an yii2.0 extension provides enhanced maintenance mode with restricted access for internal tests.

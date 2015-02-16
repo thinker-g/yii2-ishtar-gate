@@ -1,6 +1,6 @@
 {
     "name": "thinker-g/yii2-ishtar-gate",
-    "description": "Ishtar Gate is an yii2.0 extension provides enhanced maintenance mode with restricted access for internal tests.",
+    "description": "Ishtar Gate, enhanced maintenance mode extension for yii framework 2.0.",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"," maintenance"," maintenance mode"," ishtar"," ishtar gate"],
     "license": "MIT",
@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*"
     },
     "autoload": {
         "psr-4": {
