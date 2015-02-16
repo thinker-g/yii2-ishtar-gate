@@ -24,7 +24,7 @@ For planned maintenance, a news ticker is integrated in the module, so that we c
 
 *PS: Instructions of setting up these enhanced features will be mentioned in later sections.*
 
-### Does is hurt?
+### Does it hurt?
 The system performance has been well considered while designing this module. Even the module is not frequently used and needs to be mounted to the "bootstrap" phase, it does nothing when it's set to disabled. To load an empty module takes barely no resource for yii framework.
 
 
@@ -32,12 +32,60 @@ The system performance has been well considered while designing this module. Eve
 ## Quick start
 -----
 
-### 1. Installation
+### 1. Install
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+To install via composer, issuing following command in root directory of your yii2.0 application.
+```bash 
+    php composer.phar "thinker-g/yii2-ishtar-gate:dev-master"
+```
+It can also be installed by downloading a copy directly from [Github project page](https://github.com/thinker-g/yii2-ishtar-gate). If you install in this way, you need to setup a path alias for the namespace "thinkerg\IshtarGate". For instance, we place the module folder(yii2-ishtar-gate) in "runtime/tmp-extensions" in application root path. Add following alias definition to attribute "aliases" of the yii application object.
+```php
+	return [
+		...
+		'aliases' => [
+			'@thinkerg\IshtarGate' => 'runtime/tmp-extensions/yii2-ishtar-gate'
+		]
+		...
+	]
+
+```
 
 
-### 2. Loading
+### 2. Mount
+Mount the module to the application in the same way to any other modules. In this case, we use "istharDemo" as the module ID.
+```php
+    ...
+    'modules' => [
+        'ishtarDemo' => [
+            'class' => 'thinkerg\IshtarGate\Module'
+        ]
+    ],
+    ...
 
-### 3. Enabling
+```
+And then add the \<module ID\> to "bootstrap" of the application.
+```php
+    ...
+    'bootstrap' => ['log', 'ishtarDemo'],
+    ...
+```
+
+### 3. Enable
+Now the module is ready to bring your site into maintenance mode. But you cannot see any change on your site yet, because the module is note enabled. To enable it, need set the module attribute "*enabled*" to *true*.
+```php
+   ...
+    'modules' => [
+        'ishtarDemo' => [
+            'class' => 'thinkerg\IshtarGate\Module',
+            'enabled' => true
+        ]
+    ],
+    ...
+```
+
+Now you should be seeing that your site always displays Ishtar Gate's default blocker page, no matter which route you are accessing. Enjoy ;-)
+
+We'll introduce enhanced features and advanced settings in following sections.
 
 
 ## Enhanced Features
@@ -55,9 +103,14 @@ The system performance has been well considered while designing this module. Eve
 # need mention original site url of inewsticker, and the overriding of plugin options.
 ```
 
+### III. Tip version
 
-## Options
+
+## Basic Settings
 -----
 | **Name** | **Type** | **Default** | **Usage** |
 |----------|----------|-------------|-----------|
 | enabled  | bool     | false       | Enable the maintenance or not.|
+
+
+## Advanced Settings
