@@ -113,7 +113,7 @@ class Module extends \yii\base\Module
      * The array keys are username, and values are corresponding HASHED password.
      * The hash method is set in $hashCallable.
      */
-    public $credentials = ['tester' => 'f5d1278e8109edd94e1e4197e04873b9'];
+    public $credentials = ['tester' => 'tester'];
 
     /**
      * @var array Pivileged IPs, white list, widecast such as '192.168.1.*' are supported to allow IP ranges.
@@ -166,11 +166,11 @@ class Module extends \yii\base\Module
 
     /**
      * @var mixed Callback to hash the password while authencating users.
-     * Default to \thinkerg\IshtarGate\Module::hashPassword($pwd);
+     * Default to thinkerg\IshtarGate\Module::dummyHash
      * The signature of the called function should take 1 parameter to receive the inputted password,
      * and return the hashed string. The returned string will then be used to compare to "values" set in $credentials.
      */
-    public $hashCallable = [];
+    public $hashCallable = 'thinkerg\IshtarGate\Module::dummyHash';
 
     /**
      * @var array An array contains the messages for informing maintenance,
@@ -225,7 +225,6 @@ class Module extends \yii\base\Module
         if ($this->enabled) {
             // Initialize attributes
             empty($this->blockerRoute) && ($this->blockerRoute = [$this->id . '/' . $this->defaultRoute]);
-            empty($this->hashCallable) && ($this->hashCallable = [$this, 'hashPassword']);
 
             if (empty($this->onlyRoutes)) {
                 // Positive blocking
@@ -420,13 +419,13 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * Default hash password method.
+     * Example password hashing method, returns the password without doing anything.
      * @param string $password
      * @return string
      */
-    public static function hashPassword($password)
+    public static function dummyHash($password)
     {
-        return md5($password);
+        return $password;
     }
 
 }
