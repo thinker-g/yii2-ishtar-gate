@@ -274,7 +274,7 @@ When a tester is doing internal tests, a version tip can be shown in the bottom 
 | <label for="" id="o_privIPs">privIPs</label> | array | [] | Array of IP addresses, requests from these IPs will never be blocked. |
 | <label for="" id="o_sessKey">sessKey</label> | string | 'ishtar' | Session key to support Alpha Login authencation. |
 | <label for="" id="o_exceptRoutes">exceptRoutes</label> | array | [] | Routes listed here won't be blocked. |
-| <label for="" id="o_onlyRoutes">onlyRoutes</label> | array | []] | Only routes listed here will be blocked.<br />When it has value, [exceptRoutes](#o_exceptRoutes) won't take effects. |
+| <label for="" id="o_onlyRoutes">onlyRoutes</label> | array | [] | Only routes listed here will be blocked.<br />When it has value, [exceptRoutes](#o_exceptRoutes) won't take effects. |
 | <label for="" id="o_blockerRoute">blockerRoute</label> | array | &lt;module ID&gt;/gate/index | Blocker page route. |
 | <label for="" id="o_useRedirection">useRedirection</label> | bool | false | The way to display the blocker page, set to false to overwrite \yii\web\Application::$catchAll, set to true to always redirect users to the blocker route. |
 | <label for="" id="o_errActionRoute">errActionRoute</label> | string | 'site/error' | Error handler of Yii::$app. This should be the value of the "errorAction" of your application. |
