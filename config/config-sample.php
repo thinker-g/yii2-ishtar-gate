@@ -13,7 +13,7 @@
 return [
     'class' => 'thinkerg\IshtarGate\Module',
 
-    'enabled' => true,
+    'enabled' => false,
 
     'blockerRoute' => [],
     'useRedirection' => false,
