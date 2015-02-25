@@ -37,7 +37,7 @@ The system performance has been well considered while designing this module. Eve
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 To install via composer, issuing following command in root directory of your yii2.0 application.
 ```bash 
-    php composer.phar "thinker-g/yii2-ishtar-gate:dev-master"
+    php composer.phar require "thinker-g/yii2-ishtar-gate:dev-master"
 ```
 It can also be installed by downloading a copy directly from [Github project page](https://github.com/thinker-g/yii2-ishtar-gate). If you install in this way, you need to setup a path alias for the namespace "thinkerg\IshtarGate". For instance, we place the module folder(yii2-ishtar-gate) in "runtime/tmp-extensions" in application root path. Add following alias definition to attribute "[***aliases***](http://www.yiiframework.com/doc-2.0/yii-base-module.html#$aliases-detail)" of the yii application object.
 ```php
