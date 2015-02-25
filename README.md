@@ -44,7 +44,7 @@ It can also be installed by downloading a copy directly from [Github project pag
     return [
         ...
         'aliases' => [
-            '@thinkerg\IshtarGate' => 'runtime/tmp-extensions/yii2-ishtar-gate'
+            '@thinkerg\IshtarGate' => '@runtime/tmp-extensions/yii2-ishtar-gate'
         ]
         ...
     ]
