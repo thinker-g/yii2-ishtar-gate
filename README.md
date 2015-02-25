@@ -5,11 +5,11 @@
 ## Description
 -----
 ### What's this?
-*Ishtar Gate* is an yii2.0 extension provides enhanced maintenance mode of a project.
+*Ishtar Gate* is an ready-to-use module gives enhanced maintenance mode to a yii 2.0 website. It provides 2 different Blocking Modes, with some enhanced features: Alpha Test Authencation, News Ticker, etc.
 
-It provides a web-based module, which can block public accesses, while allowing permitted users (normally our testers) to access the web site without any restriction. Blocked users will all be displayed a pre-defined maintenance page.
+It can put the entire site or just a part of it into maintenance mode. When enabled, only permitted users (normally our testers) are allowed to access the website without limitation. All other public users will be shown a pre-defined maintenance page.
 
-This gives our development team an opportunity to run their test on production environment without "surprising" the public users, and to verify the results without being effected by operations from them.
+The idea is to give our team an opportunity to test their new changes on live site, without "surprising" public users. And also to allow them to verify the results that are not effected by operations from the public.
 
 ### How it works?
 The blocking control is based on yii request route. Two **blocking modes** mentioned below can be applied:
@@ -282,3 +282,10 @@ When a tester is doing internal tests, a version tip can be shown in the bottom 
 | <a id="o_news"></a>news | array | [] | News entries array, where the key is the time string and value is the messages.<br />Only messages whose key is "later" than CURRENT TIME will be displayed. Takes effects only when module is NOT enabled. |
 | <a id="o_newsTicker"></a>newsTicker | string or array | 'thinkerg\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
 | <a id="o_customField"></a>customField | string | 'System is down for maintenance. We\'ll return in a moment' | Custom message can be invoked in view of blocker page. |
+
+
+
+## Contact Me
+-----
+
+If you have any questions or cool ideas, you are welcome to [submit an issue](https://github.com/thinker-g/yii2-ishtar-gate/issues) or send email to jiyan.guo@gmail.com . 
