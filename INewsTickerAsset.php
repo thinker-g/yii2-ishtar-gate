@@ -11,6 +11,7 @@ namespace thinkerg\IshtarGate;
 use Yii;
 use yii\web\AssetBundle;
 use yii\web\View;
+use yii\helpers\Html;
 /**
  * Asset bundle of jquery plugin "Inews ticker".
  * @author Thinker_g
@@ -144,7 +145,7 @@ class INewsTickerAsset extends AssetBundle
     {
         $html = '';
         foreach (Yii::$app->getView()->params['news'] as $ts => $news) {
-            $html .= '<li>' . str_replace('{ts}', $ts, $news) . '</li>';
+            $html .= '<li>' . Html::encode(str_replace('{ts}', $ts, $news)) . '</li>';
         }
         return $html;
     }
