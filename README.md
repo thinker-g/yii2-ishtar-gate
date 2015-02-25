@@ -41,13 +41,13 @@ To install via composer, issuing following command in root directory of your yii
 ```
 It can also be installed by downloading a copy directly from [Github project page](https://github.com/thinker-g/yii2-ishtar-gate). If you install in this way, you need to setup a path alias for the namespace "thinkerg\IshtarGate". For instance, we place the module folder(yii2-ishtar-gate) in "runtime/tmp-extensions" in application root path. Add following alias definition to attribute "[***aliases***](http://www.yiiframework.com/doc-2.0/yii-base-module.html#$aliases-detail)" of the yii application object.
 ```php
-	return [
-		...
-		'aliases' => [
-			'@thinkerg\IshtarGate' => 'runtime/tmp-extensions/yii2-ishtar-gate'
-		]
-		...
-	]
+    return [
+        ...
+        'aliases' => [
+            '@thinkerg\IshtarGate' => 'runtime/tmp-extensions/yii2-ishtar-gate'
+        ]
+        ...
+    ]
 
 ```
 
@@ -265,20 +265,20 @@ When a tester is doing internal tests, a version tip can be shown in the bottom 
 
 | **Name** | **Type** | **Default** | **Usage** |
 |----------|----------|-------------|-----------|
-| <label id="o_enabled">enabled</label> | bool | false | Enable the maintenance or not. |
-| <label id="o_tipVersion">tipVersion</label> | bool | true | Whether to tip version on page in test accesses. Only take effects when [enabled](#o_enabled) is set to true. |
-| <label id="o_layout">layout</label> | string | 'main' | Layout file used to render the blocker page. |
-| <label id="o_logoutPublic">logoutPublic</label> | bool | false | Whether to logout the logged users when maintenance mode is enabled. Only takes effects in positive blocking mode. |
-| <label for="" id="o_siteLogoutRoute">siteLogoutRoute</label> | array | ['site/logout'] | Route used to logout users when maintenance mode is enabled.<br />This takes effect only when $logoutPublic is set to true.<br />Leave it as "null" or an empty array, system will use Yii::$app->getUser()->logout() to logout current user. Otherwise user will be redirected to the specified route, and the destination route must allow GET request. |
-| <label for="" id="o_credentials">credentials</label> | array | ['tester' => 'tester'] | Alpha test user credentials, where key are usernames, and values are hashed passwords. |
-| <label for="" id="o_privIPs">privIPs</label> | array | [] | Array of IP addresses, requests from these IPs will never be blocked. |
-| <label for="" id="o_sessKey">sessKey</label> | string | 'ishtar' | Session key to support Alpha Login authencation. |
-| <label for="" id="o_exceptRoutes">exceptRoutes</label> | array | [] | Routes listed here won't be blocked. |
-| <label for="" id="o_onlyRoutes">onlyRoutes</label> | array | [] | Only routes listed here will be blocked.<br />When it has value, [exceptRoutes](#o_exceptRoutes) won't take effects. |
-| <label for="" id="o_blockerRoute">blockerRoute</label> | array | &lt;module ID&gt;/gate/index | Blocker page route. |
-| <label for="" id="o_useRedirection">useRedirection</label> | bool | false | The way to display the blocker page, set to false to overwrite \yii\web\Application::$catchAll, set to true to always redirect users to the blocker route. |
-| <label for="" id="o_errActionRoute">errActionRoute</label> | string | 'site/error' | Error handler of Yii::$app. This should be the value of the "errorAction" of your application. |
-| <label for="" id="o_hashCallable">hashCallable</label> | callable | 'thinkerg\IshtarGate\Module::dummyHash' | Callable used to hash the inputted password in Alpha Login authencation.<br />The default method return the password without doing anything. |
-| <label for="" id="o_news">news</label> | array | [] | News entries array, where the key is the time string and value is the messages.<br />Only messages whose key is "later" than CURRENT TIME will be displayed. Takes effects only when module is NOT enabled. |
-| <label for="" id="o_newsTicker">newsTicker</label> | string or array | 'thinkerg\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
-| <label for="" id="o_customField">customField</label> | string | 'System is down for maintenance. We\'ll return in a moment' | Custom message can be invoked in view of blocker page. |
+| <a id="o_enabled"></a>enabled | bool | false | Enable the maintenance or not. |
+| <a id="o_tipVersion"></a>tipVersion | bool | true | Whether to tip version on page in test accesses. Only take effects when [enabled](#o_enabled) is set to true. |
+| <a id="o_layout"></a>layout | string | 'main' | Layout file used to render the blocker page. |
+| <a id="o_logoutPublic"></a>logoutPublic | bool | false | Whether to logout the logged users when maintenance mode is enabled. Only takes effects in positive blocking mode. |
+| <a id="o_siteLogoutRoute"></a>siteLogoutRoute | array | ['site/logout'] | Route used to logout users when maintenance mode is enabled.<br />This takes effect only when $logoutPublic is set to true.<br />Leave it as "null" or an empty array, system will use Yii::$app->getUser()->logout() to logout current user. Otherwise user will be redirected to the specified route, and the destination route must allow GET request. |
+| <a id="o_credentials"></a>credentials | array | ['tester' => 'tester'] | Alpha test user credentials, where key are usernames, and values are hashed passwords. |
+| <a id="o_privIPs"></a>privIPs | array | [] | Array of IP addresses, requests from these IPs will never be blocked. |
+| <a id="o_sessKey"></a>sessKey | string | 'ishtar' | Session key to support Alpha Login authencation. |
+| <a id="o_exceptRoutes"></a>exceptRoutes | array | [] | Routes listed here won't be blocked. |
+| <a id="o_onlyRoutes"></a>onlyRoutes | array | [] | Only routes listed here will be blocked.<br />When it has value, [exceptRoutes](#o_exceptRoutes) won't take effects. |
+| <a id="o_blockerRoute"></a>blockerRoute | array | &lt;module ID&gt;/gate/index | Blocker page route. |
+| <a id="o_useRedirection"></a>useRedirection | bool | false | The way to display the blocker page, set to false to overwrite \yii\web\Application::$catchAll, set to true to always redirect users to the blocker route. |
+| <a id="o_errActionRoute"></a>errActionRoute | string | 'site/error' | Error handler of Yii::$app. This should be the value of the "errorAction" of your application. |
+| <a id="o_hashCallable"></a>hashCallable | callable | 'thinkerg\IshtarGate\Module::dummyHash' | Callable used to hash the inputted password in Alpha Login authencation.<br />The default method return the password without doing anything. |
+| <a id="o_news"></a>news | array | [] | News entries array, where the key is the time string and value is the messages.<br />Only messages whose key is "later" than CURRENT TIME will be displayed. Takes effects only when module is NOT enabled. |
+| <a id="o_newsTicker"></a>newsTicker | string or array | 'thinkerg\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
+| <a id="o_customField"></a>customField | string | 'System is down for maintenance. We\'ll return in a moment' | Custom message can be invoked in view of blocker page. |
