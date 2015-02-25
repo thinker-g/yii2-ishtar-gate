@@ -66,7 +66,7 @@ class Module extends \yii\base\Module
     /**
      * @var string Module version.
      */
-    private $version = 'v1.1.0';
+    private $version = 'v1.0.1';
 
     /**
      * @var bool If the site is in maintenance mode. Default to false.
