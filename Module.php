@@ -4,7 +4,7 @@
  * @copyright Copyright (c) Thinker_g (Jiyan.guo@gmail.com)
  * @author Thinker_g
  * @license MIT
- * @since v1.0.0
+ * @version v1.0.1
  */
 namespace thinkerg\IshtarGate;
 
@@ -12,6 +12,7 @@ use Yii;
 use yii\web\Application;
 use yii\base\Event;
 use yii\web\View;
+use yii\helpers\StringHelper;
 
 /**
  * Ishtar Gate is a new version of Alpha Portal Module developed based on Yii 2.0.
@@ -22,7 +23,7 @@ use yii\web\View;
  * finish their test or deployment tasks. A login action will be provided for alpha test login.
  * While it's not be enabled, one or more messages can be setup and displayed on all site pages,
  * to give a tip for an upcoming planned maintenance.
- * 
+ *
  * Blocking modes:
  * 2 blocking modes are supported: "positive blocking" and "passive blocking".
  * In "Positive blocking" mode, all accesses except certain ones are blocked;
@@ -34,6 +35,7 @@ use yii\web\View;
  * @property bool $isAlphaLogin
  * @property bool $isPrivIP
  * @property bool $isTesterAccess
+ * @property bool $isPositive
  *
  */
 class Module extends \yii\base\Module
@@ -44,6 +46,18 @@ class Module extends \yii\base\Module
      * The blocking can be performed by either a redirection or the route set in \yii\web\Application::$catchAll.
      */
     const EVENT_BEFORE_BLOCK = 'ishtarBeforeBlock';
+
+    /**
+     *
+     * @var string Event triggered after initialization when module is enabled.
+     */
+    const EVENT_AFTER_ENABLED_INIT = 'ishtarAfterEnabledInit';
+
+    /**
+     *
+     * @var string Event triggered after initialization when module is disabled.
+     */
+    const EVENT_AFTER_ENABLED_INIT = 'ishtarAfterDisabledInit';
 
     /**
      *
@@ -95,7 +109,7 @@ class Module extends \yii\base\Module
      * to support this attribute, otherwise an exception might be thrown.
      *
      * @see \thinkerg\IshtarGate\Module::$siteLogoutRoute
-     * 
+     *
      */
     public $logoutPublic = false;
 
@@ -109,7 +123,7 @@ class Module extends \yii\base\Module
     public $siteLogoutRoute = ['site/logout'];
 
     /**
-     * @var array Alpha test user credentials. Let these users pass. 
+     * @var array Alpha test user credentials. Let these users pass.
      * The array keys are username, and values are corresponding HASHED password.
      * The hash method is set in $hashCallable.
      */
@@ -246,9 +260,11 @@ class Module extends \yii\base\Module
                 Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'passiveBlocking']);
             }
 
+            $this->trigger(self::EVENT_AFTER_ENABLED_INIT);
             $this->tipVersion && $this->isTesterAccess && $this->tipVersion();
 
         } else {
+            $this->trigger(self::EVENT_AFTER_DISABLED_INIT);
             // news bar initialization
             empty($this->news) || $this->loadNewsTicker();
         }
@@ -293,6 +309,15 @@ class Module extends \yii\base\Module
     public function getIsAlphaLogin()
     {
         return Yii::$app->getSession()->has($this->sessKey);
+    }
+
+    /**
+     * Whether current module is working under Positive Blocking mode.
+     * @return bool If current mode is positive blocking.
+     */
+    public function getIsPositive()
+    {
+        return empty($this->onlyRoutes);
     }
 
     /**
@@ -379,7 +404,7 @@ class Module extends \yii\base\Module
             Yii::$app->getView()->params['news'] = $this->news;
             if (is_array($this->newsTicker)) {
                 $class = $this->newsTicker['class'];
-                // if the bundle options has been explicitly set in bundles of assetManager, dont copy. 
+                // if the bundle options has been explicitly set in bundles of assetManager, dont copy.
                 if (!isset(Yii::$app->getAssetManager()->bundles[$class])) {
                     unset($this->newsTicker['class']);
                     Yii::$app->getAssetManager()->bundles[$class] = $this->newsTicker;
