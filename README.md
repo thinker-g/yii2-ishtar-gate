@@ -247,7 +247,7 @@ For a planned maintenance, you may want to inform your users before it takes pla
         ...
     ```
 
-**NOTE:** News ticker will only take effects when attribute [***enabled***](#o_enabled) is set to **false**.*
+**NOTE:** News ticker will only take effects when attribute [***enabled***](#o_enabled) is set to **false**.
 
 
 
