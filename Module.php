@@ -12,7 +12,6 @@ use Yii;
 use yii\web\Application;
 use yii\base\Event;
 use yii\web\View;
-use yii\helpers\StringHelper;
 
 /**
  * Ishtar Gate is a new version of Alpha Portal Module developed based on Yii 2.0.
@@ -57,7 +56,7 @@ class Module extends \yii\base\Module
      *
      * @var string Event triggered after initialization when module is disabled.
      */
-    const EVENT_AFTER_ENABLED_INIT = 'ishtarAfterDisabledInit';
+    const EVENT_AFTER_DISABLED_INIT = 'ishtarAfterDisabledInit';
 
     /**
      *
