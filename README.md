@@ -116,7 +116,7 @@ By default, *Ishtar Gate* use its own layout file while rendering the blocker pa
 
 ### 2. Positive blocking
 
-Positive blocking is the default mode of the module. When the module is ENABLED, all routes will be block except the ones set in [***exceptRoutes***](o_exceptRoutes). 
+Positive blocking is the default mode of the module. When the module is ENABLED, all routes will be block except the ones set in [***exceptRoutes***](#o_exceptRoutes). 
 
 To let certain route open to the public, you need to add the route to attribute [***exceptRoutes***](#o_exceptRoutes). Following example shows how to let pass the access of route "/site/about", while the maintenance mode is enabled.
 
@@ -173,7 +173,7 @@ Test access control allows project team members to access the website with no re
 
 - **Setup privileged IPs** 
 
-    Add IP addresses or IP ranges to the attribute [***privilegedIPs***](#o_privilegedIPs). This is an array composed by strings of IP address. Requests from IPs listed in the array will never be blocked. Wildcard is supported in here, it follows the same rules of the Gii module.
+    Add IP addresses or IP ranges to the attribute [***privilegedIPs***](#o_privIPs). This is an array composed by strings of IP address. Requests from IPs listed in the array will never be blocked. Wildcard is supported in here, it follows the same rules of the Gii module.
 
 - **Alpha Login control**
 
@@ -247,7 +247,7 @@ For a planned maintenance, you may want to inform your users before it takes pla
         ...
     ```
 
-**NOTE:** *News ticker will only take effects when attribute [***enabled***](#o_enabled) is set to **false**.*
+**NOTE:** News ticker will only take effects when attribute [***enabled***](#o_enabled) is set to **false**.*
 
 
 
@@ -255,7 +255,7 @@ For a planned maintenance, you may want to inform your users before it takes pla
 
 When a tester is doing internal tests, a version tip can be shown in the bottom right of the page. This can notice our testers/developers that they are now accessing in alpha test mode, while the site is actually blocking other accesses from the public. This feature is enabled by default, and can be turned off by setting option [***tipVersion***](#o_tipVersion) to *false*.
 
-**NOTE:** *The version tip will only show up when [***tipVersion***](#o_tipVersion) is set to **true** AND current request is a test access (authenticated by **Alpha Login** or from a privileged IP).*
+**NOTE:** The version tip will only show up when [***tipVersion***](#o_tipVersion) is set to **true** AND current request is a test access (authenticated by **Alpha Login** or from a **Privileged IP**).
 
 
 
