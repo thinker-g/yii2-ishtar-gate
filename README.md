@@ -3,7 +3,7 @@
 
 
 ## Description
------
+
 ### What's this?
 *Ishtar Gate* is an ready-to-use module gives enhanced maintenance mode to a yii 2.0 website. It provides 2 different Blocking Modes, with some enhanced features: Alpha Test Authencation, News Ticker, etc.
 
@@ -28,10 +28,9 @@ For planned maintenance, a news ticker is integrated in the module, so that we c
 ### Does it hurt?
 The system performance has been well considered while designing this module. Even the module is not frequently used and needs to be mounted to the "bootstrap" phase, it does nothing when it's set to disabled. To load an empty module takes barely no resource for yii framework.
 
-
+-----
 
 ## Quick start
------
 
 ### 1. Install
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
@@ -88,10 +87,9 @@ Now you should be seeing that your site always displays Ishtar Gate's default bl
 
 We'll introduce basic settings and enhanced features in later sections.
 
-
+-----
 
 ## Basic Usage
------
 
 **NOTE:** As aforementioned, the blocking control is based on yii request route. The routes in configuration should be full route name WITHOUT the leading slash "/". For example the route in setting "site/about" stands for the real route "/site/about", the leading slash will be then prepended automatically by the module.
 
@@ -162,11 +160,11 @@ When the module is ENABLED and any routes added to attribute [***onlyRoutes***](
 
 Once any routes are added to [***onlyRoutes***](#o_onlyRoutes), the passive blocking is enabled. So to use positive blocking mode just need to leave the [***onlyRoutes***](#o_onlyRoutes) as an empty array or false. 
 
-
+-----
 
 
 ## Enhanced Features
------
+
 ### 1. Alpha test access
 
 Test access control allows project team members to access the website with no restriction, while the maintenance mode is enabled (where public users are blocked). To achieve this, we have 2 options, **privileged IPs** and **Alpha Login**.
@@ -283,9 +281,8 @@ When a tester is doing internal tests, a version tip can be shown in the bottom 
 | <a id="o_newsTicker"></a>newsTicker | string or array | 'thinkerg\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
 | <a id="o_customField"></a>customField | string | 'System is down for maintenance. We\'ll return in a moment' | Custom message can be invoked in view of blocker page. |
 
-
+-----
 
 ## Contact Me
------
 
 If you have any questions or cool ideas, you are welcome to [submit an issue](https://github.com/thinker-g/yii2-ishtar-gate/issues) or send email to jiyan.guo@gmail.com . 
