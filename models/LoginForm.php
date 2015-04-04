@@ -1,6 +1,6 @@
 <?php
 
-namespace thinkerg\IshtarGate\models;
+namespace thinker_g\IshtarGate\models;
 
 use Yii;
 use yii\base\Model;

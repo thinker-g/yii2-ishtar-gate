@@ -6,7 +6,7 @@
  * @license MIT
  * @version v1.0.1
  */
-namespace thinkerg\IshtarGate;
+namespace thinker_g\IshtarGate;
 
 use Yii;
 use yii\web\Application;
@@ -63,7 +63,7 @@ class Module extends \yii\base\Module
      * @var string
      * @see \yii\base\Module::$controllerNamespace
      */
-    public $controllerNamespace = 'thinkerg\IshtarGate\controllers';
+    public $controllerNamespace = 'thinker_g\IshtarGate\controllers';
 
     /**
      * @see \yii\base\Module::$defaultRoute.
@@ -104,10 +104,10 @@ class Module extends \yii\base\Module
      * Default to false, \Yii::$app->user->logout() will be invoked to logout current user.
      * If set to true, and $siteLogoutRoute is null,
      * the attribute $siteLogoutRoute will be used as the route to logout users.
-     * ATTENTION: the route \thinkerg\IshtarGate\Module::$siteLogoutRoute must accept GET request
+     * ATTENTION: the route \thinker_g\IshtarGate\Module::$siteLogoutRoute must accept GET request
      * to support this attribute, otherwise an exception might be thrown.
      *
-     * @see \thinkerg\IshtarGate\Module::$siteLogoutRoute
+     * @see \thinker_g\IshtarGate\Module::$siteLogoutRoute
      *
      */
     public $logoutPublic = false;
@@ -117,7 +117,7 @@ class Module extends \yii\base\Module
      * This takes effect only when $logoutPublic is set to true.
      * Leave it as "null" or an empty array, system will use Yii::$app->getUser()->logout() to logout current user.
      * Otherwise user will be redirected to the specified route, and the destination route must allow GET request.
-     * @see \thinkerg\IshtarGate\Module::$logoutPublic
+     * @see \thinker_g\IshtarGate\Module::$logoutPublic
      */
     public $siteLogoutRoute = ['site/logout'];
 
@@ -167,7 +167,7 @@ class Module extends \yii\base\Module
     /**
      * @var bool Set to true to redirect user to a static route.
      * Default to false, the \yii\web\Application::$catchAll will be used for processing all requests;
-     * if set to true, the user will be redirected to the route set in \thinkerg\IshtarGate\Module::$blockerRoute.
+     * if set to true, the user will be redirected to the route set in \thinker_g\IshtarGate\Module::$blockerRoute.
      */
     public $useRedirection = false;
 
@@ -179,11 +179,11 @@ class Module extends \yii\base\Module
 
     /**
      * @var mixed Callback to hash the password while authencating users.
-     * Default to thinkerg\IshtarGate\Module::dummyHash
+     * Default to thinker_g\IshtarGate\Module::dummyHash
      * The signature of the called function should take 1 parameter to receive the inputted password,
      * and return the hashed string. The returned string will then be used to compare to "values" set in $credentials.
      */
-    public $hashCallable = 'thinkerg\IshtarGate\Module::dummyHash';
+    public $hashCallable = 'thinker_g\IshtarGate\Module::dummyHash';
 
     /**
      * @var array An array contains the messages for informing maintenance,
@@ -219,7 +219,7 @@ class Module extends \yii\base\Module
      * The class must be subclass of \yii\web\AssetBundle.
      * The module will register this automatically to current view component.
      */
-    public $newsTicker = 'thinkerg\IshtarGate\INewsTickerAsset';
+    public $newsTicker = 'thinker_g\IshtarGate\INewsTickerAsset';
 
     /**
      * @var mixed Custom attribute to store custom messages or some other things.

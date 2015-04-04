@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace thinkerg\IshtarGate;
+namespace thinker_g\IshtarGate;
 
 use Yii;
 use yii\web\AssetBundle;
@@ -24,7 +24,7 @@ class INewsTickerAsset extends AssetBundle
      * @var string overriding parament property.
      * @see \yii\web\AssetBundle::$sourcePath
      */
-    public $sourcePath = '@thinkerg/IshtarGate/assets';
+    public $sourcePath = '@thinker_g/IshtarGate/assets';
 
     /**
      * @var array overriding parent property.

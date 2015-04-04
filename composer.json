@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "thinkerg\\IshtarGate\\": ""
+            "thinker_g\\IshtarGate\\": ""
         }
     }
 }

@@ -6,17 +6,17 @@
  * @license MIT
  */
 
-namespace thinkerg\IshtarGate\controllers;
+namespace thinker_g\IshtarGate\controllers;
 
 use Yii;
-use thinkerg\IshtarGate\models\LoginForm;
+use thinker_g\IshtarGate\models\LoginForm;
 use yii\web\HttpException;
 
 /**
  * 
  * @author Thinker_g
  * 
- * @property $module \thinkerg\IshtarGate\Module;
+ * @property $module \thinker_g\IshtarGate\Module;
  *
  */
 class GateController extends \yii\web\Controller

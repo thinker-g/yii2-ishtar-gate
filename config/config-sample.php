@@ -11,7 +11,7 @@
  */
 
 return [
-    'class' => 'thinkerg\IshtarGate\Module',
+    'class' => 'thinker_g\IshtarGate\Module',
 
     'enabled' => false,
 
@@ -25,12 +25,12 @@ return [
 
     'privIPs' => [],
     'credentials' => ['tester' => 'tester'],
-    'hashCallable' => 'thinkerg\IshtarGate\Module::dummyHash',
+    'hashCallable' => 'thinker_g\IshtarGate\Module::dummyHash',
 
     'logoutPublic' => false,
     'siteLogoutRoute' => ['site/logout'],
 
-    'newsTicker' => 'thinkerg\IshtarGate\INewsTickerAsset',
+    'newsTicker' => 'thinker_g\IshtarGate\INewsTickerAsset',
     'news' => [],
 
     'errActionRoute' => 'site/error',

@@ -38,12 +38,12 @@ To install via composer, issuing following command in root directory of your yii
 ```bash 
     php composer.phar require "thinker-g/yii2-ishtar-gate:dev-master"
 ```
-It can also be installed by downloading a copy directly from [Github project page](https://github.com/thinker-g/yii2-ishtar-gate). If you install in this way, you need to setup a path alias for the namespace "thinkerg\IshtarGate". For instance, we place the module folder(yii2-ishtar-gate) in "runtime/tmp-extensions" in application root path. Add following alias definition to attribute "[***aliases***](http://www.yiiframework.com/doc-2.0/yii-base-module.html#$aliases-detail)" of the yii application object.
+It can also be installed by downloading a copy directly from [Github project page](https://github.com/thinker-g/yii2-ishtar-gate). If you install in this way, you need to setup a path alias for the namespace "thinker_g\IshtarGate". For instance, we place the module folder(yii2-ishtar-gate) in "runtime/tmp-extensions" in application root path. Add following alias definition to attribute "[***aliases***](http://www.yiiframework.com/doc-2.0/yii-base-module.html#$aliases-detail)" of the yii application object.
 ```php
     return [
         ...
         'aliases' => [
-            '@thinkerg\IshtarGate' => '@runtime/tmp-extensions/yii2-ishtar-gate'
+            '@thinker_g\IshtarGate' => '@runtime/tmp-extensions/yii2-ishtar-gate'
         ]
         ...
     ]
@@ -57,7 +57,7 @@ Mount the module to the application in the same way to any other modules. In thi
     ...
     'modules' => [
         'ishtarDemo' => [
-            'class' => 'thinkerg\IshtarGate\Module'
+            'class' => 'thinker_g\IshtarGate\Module'
         ]
     ],
     ...
@@ -76,7 +76,7 @@ Now the module is ready to bring your site into maintenance mode. But you cannot
    ...
     'modules' => [
         'ishtarDemo' => [
-            'class' => 'thinkerg\IshtarGate\Module',
+            'class' => 'thinker_g\IshtarGate\Module',
             'enabled' => true
         ]
     ],
@@ -101,7 +101,7 @@ When *Ishtar Gate* blocks public accesses, it will run a certain route configure
     ...
     'modules' => [
         'ishtarDemo' => [
-            'class' => 'thinkerg\IshtarGate\Module',
+            'class' => 'thinker_g\IshtarGate\Module',
             'enabled' => true,
             'blockerRoutes' => ['site/about'],
         ],
@@ -122,7 +122,7 @@ To let certain route open to the public, you need to add the route to attribute 
     ...
     'modules' => [
         'ishtarDemo' => [
-            'class' => 'thinkerg\IshtarGate\Module',
+            'class' => 'thinker_g\IshtarGate\Module',
             'enabled' => true,
             'exceptRoutes' => [
                 'site/about'
@@ -143,7 +143,7 @@ When the module is ENABLED and any routes added to attribute [***onlyRoutes***](
     ...
     'modules' => [
         'ishtarDemo' => [
-            'class' => 'thinkerg\IshtarGate\Module',
+            'class' => 'thinker_g\IshtarGate\Module',
             'enabled' => true,
             'onlyRoutes' => [
                 'site/signup'
@@ -198,7 +198,7 @@ For a planned maintenance, you may want to inform your users before it takes pla
         ...
         'modules' => [
             'ishtarDemo' => [
-                'class' => 'thinkerg\IshtarGate\Module',
+                'class' => 'thinker_g\IshtarGate\Module',
                 'enabled' => true,
                 ...
                 'news' => [
@@ -222,13 +222,13 @@ For a planned maintenance, you may want to inform your users before it takes pla
         ...
         'modules' => [
             'ishtarDemo' => [
-                'class' => 'thinkerg\IshtarGate\Module',
+                'class' => 'thinker_g\IshtarGate\Module',
                 'enabled' => true,
                 'news' => [
                     ...
                 ],
                 'newsTicker' => [
-                    'class' => 'thinkerg\IshtarGate\INewsTickerAsset',
+                    'class' => 'thinker_g\IshtarGate\INewsTickerAsset',
                     'pluginOptions' => [
                         'effect' => 'slide',
                         'speed' => 3000,
@@ -276,9 +276,9 @@ When a tester is doing internal tests, a version tip can be shown in the bottom 
 | <a id="o_blockerRoute"></a>blockerRoute | array | &lt;module ID&gt;/gate/index | Blocker page route. |
 | <a id="o_useRedirection"></a>useRedirection | bool | false | The way to display the blocker page, set to false to overwrite \yii\web\Application::$catchAll, set to true to always redirect users to the blocker route. |
 | <a id="o_errActionRoute"></a>errActionRoute | string | 'site/error' | Error handler of Yii::$app. This should be the value of the "errorAction" of your application. |
-| <a id="o_hashCallable"></a>hashCallable | callable | 'thinkerg\IshtarGate\Module::dummyHash' | Callable used to hash the inputted password in Alpha Login authencation.<br />The default method return the password without doing anything. |
+| <a id="o_hashCallable"></a>hashCallable | callable | 'thinker_g\IshtarGate\Module::dummyHash' | Callable used to hash the inputted password in Alpha Login authencation.<br />The default method return the password without doing anything. |
 | <a id="o_news"></a>news | array | [] | News entries array, where the key is the time string and value is the messages.<br />Only messages whose key is "later" than CURRENT TIME will be displayed. Takes effects only when module is NOT enabled. |
-| <a id="o_newsTicker"></a>newsTicker | string or array | 'thinkerg\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
+| <a id="o_newsTicker"></a>newsTicker | string or array | 'thinker_g\IshtarGate\INewsTickerAsset' | News ticker configuration (string/array). The class should extends \yii\web\AssetBundle. |
 | <a id="o_customField"></a>customField | string | 'System is down for maintenance. We\'ll return in a moment' | Custom message can be invoked in view of blocker page. |
 
 -----

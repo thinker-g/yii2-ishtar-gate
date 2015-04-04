@@ -3,11 +3,11 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use thinkerg\IshtarGate\AppAsset;
+use thinker_g\IshtarGate\AppAsset;
 
 /* @var \yii\web\View $this */
 /* @var string $content */
-/* @var \thinkerg\IshtarGate\Module $module */ 
+/* @var \thinker_g\IshtarGate\Module $module */ 
 
 $module = $this->context->module;
 $blockerRoute = $module->blockerRoute;

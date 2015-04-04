@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace thinkerg\IshtarGate;
+namespace thinker_g\IshtarGate;
 
 use yii\web\AssetBundle;
 
