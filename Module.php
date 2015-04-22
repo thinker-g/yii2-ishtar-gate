@@ -261,6 +261,7 @@ class Module extends \yii\base\Module
 
             $this->trigger(self::EVENT_AFTER_ENABLED_INIT);
             $this->tipVersion && $this->isTesterAccess && $this->tipVersion();
+            Yii::$app->layout = $this->layout;
 
         } else {
             $this->trigger(self::EVENT_AFTER_DISABLED_INIT);
