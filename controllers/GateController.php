@@ -43,7 +43,6 @@ class GateController extends \yii\web\Controller
                 $model->addError('password', 'Invalid username or password.');
             }
         }
-
         return $this->render('signin', ['model' => $model]);
 
     }

@@ -9,11 +9,11 @@ use thinker_g\IshtarGate\AppAsset;
 /* @var string $content */
 /* @var \thinker_g\IshtarGate\Module $module */ 
 
-$module = $this->context->module;
-$blockerRoute = $module->blockerRoute;
+$_module = $this->context->module;
+$blockerRoute = $_module->blockerRoute;
 if ($blockerRoute === []) {
-    $blockerRoute[0] = '/' . $module->id . '/gate/index';
-} elseif (is_array($module->blockerRoute)) {
+    $blockerRoute[0] = '/' . $_module->id . '/gate/index';
+} elseif (is_array($_module->blockerRoute)) {
     $blockerRoute[0] = '/' . $blockerRoute[0];
 } else {
     $blockerRoute = ['/' . $blockerRoute];
@@ -46,11 +46,11 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Preview blocker', 'url' => $blockerRoute],
-                    $module->isTesterAccess ?
-                        ['label' => 'Sign out (' . Yii::$app->getSession()->get($module->sessKey, 'none') . ')',
-                        'url' => ['/' . $module->id . '/gate/signout']
+                    $_module->isTesterAccess ?
+                        ['label' => 'Sign out (' . Yii::$app->getSession()->get($_module->sessKey, 'none') . ')',
+                        'url' => ['/' . $_module->id . '/gate/signout']
                         ] :
-                        ['label' => 'Sign in', 'url' => ['/' . $module->id . '/gate/signin']],
+                        ['label' => 'Sign in', 'url' => ['/' . $_module->id . '/gate/signin']],
                 ],
             ]);
             NavBar::end();

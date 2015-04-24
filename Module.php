@@ -100,6 +100,14 @@ class Module extends \yii\base\Module
     public $layout = 'main';
 
     /**
+     * Whether to use the layout file set in [[layout]] to render the module's routes.
+     * When set to false (default), the module's controller actions will
+     * use 'main' layout file in module's "views" folder.
+     * @var bool Default to false.
+     */
+    public $overrideModuleLayout = false;
+
+    /**
      * @var bool When the module is enabled, whether to logout public users.
      * Default to false, \Yii::$app->user->logout() will be invoked to logout current user.
      * If set to true, and $siteLogoutRoute is null,
@@ -261,7 +269,7 @@ class Module extends \yii\base\Module
 
             $this->trigger(self::EVENT_AFTER_ENABLED_INIT);
             $this->tipVersion && $this->isTesterAccess && $this->tipVersion();
-            Yii::$app->layout = $this->layout;
+            $this->isTesterAccess || Yii::$app->layout = $this->layout;
 
         } else {
             $this->trigger(self::EVENT_AFTER_DISABLED_INIT);
@@ -451,6 +459,18 @@ class Module extends \yii\base\Module
     public static function dummyHash($password)
     {
         return $password;
+    }
+
+    /**
+     * @inheritdoc
+     * @see \yii\base\Module::beforeAction()
+     */
+    public function beforeAction($action)
+    {
+        $continue = parent::beforeAction($action);
+        $this->overrideModuleLayout || $action->controller->layout = 'main';
+        return $continue;
+
     }
 
 }

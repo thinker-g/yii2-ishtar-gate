@@ -18,8 +18,9 @@ return [
     'blockerRoute' => [],
     'useRedirection' => false,
     'layout' => 'main',
+    'overrideModuleLayout' => false,
 
-    'exceptRoutes' => [],
+    'exceptRoutes' => [], // add route 'debug/default/toolbar' while yii2.0's debugger extension is loaded.
     'onlyRoutes' => [],
     'tipVersion' => true,
 
