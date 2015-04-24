@@ -7,13 +7,13 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
-$this->title = 'Sign In as alpha tester';
+$this->title = 'Sign In as Alpha Tester';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
     <?php if (!$this->context->module->isAlphaLogin): ?>
-        <p>Please fill out the following fields to sign in:</p>
+        <p>Please fill out the following fields to sign in as a tester:</p>
 
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
@@ -30,14 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Login', ['class' => 'btn btn-success btn-lg', 'name' => 'login-button']) ?>
             </div>
         </div>
 
         <?php ActiveForm::end(); ?>
 
         <div class="col-lg-offset-1" style="color:#999;">
-            This is the Ishtar Gate signin page. 
+            This is the Ishtar Gate signin page. <br />
+            After logged in, you'll find the logout button here: <code><?= Url::toRoute([$this->context->module->uniqueId], true) ?></code>. 
         </div>
     <?php else: ?>
         <p>
